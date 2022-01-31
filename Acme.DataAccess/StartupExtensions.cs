@@ -22,19 +22,5 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return services;
         }
-
-        public static IServiceCollection RegisterServices(IServiceCollection services, IConfiguration config)
-        {
-            services
-                .AddTransient<IProductFacade, ProductRepository>()
-                .AddTransient<IService<ProductEntity>, Service<ProductEntity>>();
-
-            services
-                .AddEntityFrameworkNpgsql()
-                .AddDbContext<PostgreSQLContext>(options => options.UseNpgsql(config.GetSection("ConnectionString").GetValue<string>("PostgreSQLConnectionString")));
-
-            return services;
-
-        }
     }
 }
